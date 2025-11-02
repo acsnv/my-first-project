@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hello Adrian</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0b0c10;
+        --fg: #e5e7eb;
+        --accent: #60a5fa;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        display: grid;
+        place-items: center;
+        background: var(--bg);
+        color: var(--fg);
+        font: 500 18px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      }
+      main {
+        text-align: center;
+        padding: 2rem 3rem;
+        border-radius: 12px;
+        background: color-mix(in oklab, var(--bg), white 8%);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      }
+      h1 {
+        margin: 0 0 .5rem;
+        font-size: clamp(2rem, 5vw, 3rem);
+      }
+      p { margin: 0; color: #9aa2b1; }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Hello Adrian 👋</h1>
+      <p>Welcome to your first project.</p>
+    </main>
+  </body>
+  
+</html>
