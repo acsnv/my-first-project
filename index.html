@@ -554,6 +554,7 @@
 
       const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
       camera.position.set(6, 3, 8);
+      camera.lookAt(0, 0.3, 0);
 
       const ambientLight = new THREE.AmbientLight(0xc8d6ff, 0.8);
       scene.add(ambientLight);
