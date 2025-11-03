@@ -3,46 +3,469 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hello Adrian</title>
+    <title>Creator Studio | Tutorials, Videos & Blogs</title>
+    <meta name="description" content="Creator Studio is a polished hub for tutorials, video lessons, and thoughtful blogs designed to help you learn and grow." />
     <style>
       :root {
         color-scheme: light dark;
-        --bg: #0b0c10;
-        --fg: #e5e7eb;
-        --accent: #60a5fa;
+        --page-bg: radial-gradient(circle at top, #0d1b2a, #050810 55%);
+        --card-bg: rgba(12, 21, 36, 0.78);
+        --text-primary: #f8fafc;
+        --text-secondary: #c1c9d6;
+        --accent: #4cc9f0;
+        --accent-strong: #f72585;
+        --border: rgba(255, 255, 255, 0.08);
+        --shadow: 0 25px 50px -20px rgba(15, 23, 42, 0.6);
+        --max-width: min(1100px, 90vw);
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
       }
-      html, body {
-        height: 100%;
-        margin: 0;
+
+      * {
+        box-sizing: border-box;
       }
+
       body {
-        display: grid;
-        place-items: center;
-        background: var(--bg);
-        color: var(--fg);
-        font: 500 18px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        margin: 0;
+        min-height: 100vh;
+        background: var(--page-bg);
+        color: var(--text-primary);
+        display: flex;
+        flex-direction: column;
       }
+
+      header {
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(14px);
+        background: rgba(5, 8, 16, 0.78);
+        border-bottom: 1px solid var(--border);
+        z-index: 10;
+      }
+
+      .nav-bar {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 1.2rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand {
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-size: 0.95rem;
+      }
+
+      nav a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin-left: 1.5rem;
+        font-size: 0.95rem;
+        transition: color 0.2s ease, transform 0.2s ease;
+      }
+
+      nav a:focus,
+      nav a:hover {
+        color: var(--accent);
+        transform: translateY(-1px);
+      }
+
       main {
+        flex: 1;
+      }
+
+      section {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 4.5rem 0;
+      }
+
+      .hero {
+        display: grid;
+        gap: 2.5rem;
+        align-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(2.8rem, 5vw, 4rem);
+        margin-bottom: 1rem;
+        line-height: 1.1;
+      }
+
+      .hero-copy p {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        max-width: 32rem;
+      }
+
+      .cta-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.85rem 1.8rem;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), #38bdf8);
+        color: #031321;
+        box-shadow: 0 15px 30px -15px rgba(76, 201, 240, 0.7);
+      }
+
+      .btn-primary:hover,
+      .btn-primary:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 35px -15px rgba(76, 201, 240, 0.9);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--text-primary);
+        border-color: rgba(76, 201, 240, 0.4);
+      }
+
+      .btn-outline:hover,
+      .btn-outline:focus {
+        color: var(--accent);
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
+
+      .hero-card {
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card h2 {
+        margin-top: 0;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--accent);
+      }
+
+      .hero-card p {
+        margin: 0.75rem 0 0;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .section-title {
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        font-size: 0.85rem;
+        color: var(--accent);
+        margin-bottom: 1rem;
+      }
+
+      .section-heading {
+        font-size: clamp(2rem, 3.2vw, 2.6rem);
+        margin-top: 0;
+        margin-bottom: 2.5rem;
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.8rem;
+      }
+
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 1.8rem;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: transform 0.25s ease, border-color 0.25s ease;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(76, 201, 240, 0.18), transparent);
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+
+      .card:hover,
+      .card:focus-within {
+        transform: translateY(-6px);
+        border-color: rgba(76, 201, 240, 0.5);
+      }
+
+      .card:hover::before,
+      .card:focus-within::before {
+        opacity: 1;
+      }
+
+      .card h3 {
+        margin-top: 0;
+        font-size: 1.25rem;
+      }
+
+      .card p {
+        color: var(--text-secondary);
+        font-size: 0.98rem;
+        line-height: 1.6;
+      }
+
+      .tag {
+        display: inline-block;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        padding: 0.35rem 0.8rem;
+        border-radius: 999px;
+        background: rgba(247, 37, 133, 0.08);
+        color: var(--accent-strong);
+        margin-bottom: 1rem;
+      }
+
+      .insight-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 1.4rem;
+      }
+
+      .insight-list li {
+        padding-left: 1.5rem;
+        border-left: 2px solid rgba(76, 201, 240, 0.25);
+      }
+
+      .insight-list h4 {
+        margin: 0 0 0.4rem;
+        font-size: 1.05rem;
+      }
+
+      .insight-list p {
+        margin: 0;
+        color: var(--text-secondary);
+      }
+
+      .cta-panel {
+        background: linear-gradient(135deg, rgba(76, 201, 240, 0.12), rgba(247, 37, 133, 0.12));
+        border-radius: 24px;
+        border: 1px solid var(--border);
+        padding: 2.8rem;
         text-align: center;
-        padding: 2rem 3rem;
-        border-radius: 12px;
-        background: color-mix(in oklab, var(--bg), white 8%);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        box-shadow: var(--shadow);
       }
-      h1 {
-        margin: 0 0 .5rem;
-        font-size: clamp(2rem, 5vw, 3rem);
+
+      .cta-panel h3 {
+        margin: 0 0 1rem;
+        font-size: clamp(2rem, 3vw, 2.4rem);
       }
-      p { margin: 0; color: #9aa2b1; }
-      a { color: var(--accent); text-decoration: none; }
-      a:hover { text-decoration: underline; }
+
+      .cta-panel p {
+        margin: 0 auto 2rem;
+        max-width: 32rem;
+        color: var(--text-secondary);
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        background: rgba(5, 8, 16, 0.84);
+      }
+
+      .footer-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 2rem 0 3rem;
+        color: var(--text-secondary);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .footer-inner small {
+        opacity: 0.7;
+      }
+
+      @media (max-width: 720px) {
+        header {
+          position: static;
+        }
+        nav {
+          display: none;
+        }
+        .hero {
+          text-align: center;
+        }
+        .hero-copy p {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .cta-group {
+          justify-content: center;
+        }
+      }
     </style>
   </head>
   <body>
+    <header>
+      <div class="nav-bar">
+        <div class="brand">Creator Studio</div>
+        <nav aria-label="Primary navigation">
+          <a href="#tutorials">Tutorials</a>
+          <a href="#insights">Insights</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
     <main>
-      <h1>Hello Adrian 👋</h1>
-      <p>Welcome to your first project.</p>
+      <section class="hero">
+        <div class="hero-copy">
+          <h1>Crafting premium tutorials, videos, and blog stories.</h1>
+          <p>
+            Welcome to Creator Studio—the curated home for immersive learning experiences.
+            Discover step-by-step tutorials, deep-dive video lessons, and insightful blogs that
+            help you build confidence in your craft.
+          </p>
+          <div class="cta-group">
+            <a class="btn btn-primary" href="#tutorials">Explore tutorials</a>
+            <a class="btn btn-outline" href="#contact">Subscribe for updates</a>
+          </div>
+        </div>
+        <article class="hero-card" aria-labelledby="upcoming">
+          <h2 id="upcoming">Upcoming premiere</h2>
+          <p>
+            "Designing with Intent"—a cinematic, hands-on workshop that walks through creating a
+            professional-grade video tutorial from storyboard to final export. Launching soon.
+          </p>
+        </article>
+      </section>
+
+      <section id="tutorials">
+        <p class="section-title">Tutorial Vault</p>
+        <h2 class="section-heading">Dive into structured learning paths</h2>
+        <div class="card-grid">
+          <article class="card" aria-labelledby="card-design">
+            <span class="tag">Video Series</span>
+            <h3 id="card-design">Design Systems that Scale</h3>
+            <p>
+              Master the art of building consistent, reusable UI components with a complete Figma to code pipeline.
+              Includes downloadable assets and code walkthroughs.
+            </p>
+          </article>
+          <article class="card" aria-labelledby="card-dev">
+            <span class="tag">Bootcamp</span>
+            <h3 id="card-dev">Full-stack Fundamentals in 10 Days</h3>
+            <p>
+              Learn the essentials of modern web development, from API design to UI polish, through a project-based curriculum.
+            </p>
+          </article>
+          <article class="card" aria-labelledby="card-video">
+            <span class="tag">Live Session</span>
+            <h3 id="card-video">Lighting & Audio for Creators</h3>
+            <p>
+              Upgrade your production quality with pro-level lighting setups, gear recommendations, and editing best practices.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="insights">
+        <p class="section-title">Blog Insights</p>
+        <h2 class="section-heading">Fresh perspectives & behind-the-scenes notes</h2>
+        <div class="card">
+          <ul class="insight-list">
+            <li>
+              <h4>Blueprint for binge-worthy tutorials</h4>
+              <p>
+                Explore the storytelling frameworks that keep viewers engaged from intro to final call-to-action.
+              </p>
+            </li>
+            <li>
+              <h4>Editing workflows that save hours</h4>
+              <p>
+                A step-by-step guide to automating repetitive edits and leveling up your post-production pipeline.
+              </p>
+            </li>
+            <li>
+              <h4>Finding your signature teaching style</h4>
+              <p>
+                Practical exercises to define your voice and deliver content that resonates with your community.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="about">
+        <p class="section-title">About</p>
+        <h2 class="section-heading">Built for creators who never stop learning</h2>
+        <div class="card-grid">
+          <article class="card">
+            <h3>Curated by experienced mentors</h3>
+            <p>
+              Every course and blog is crafted by seasoned practitioners with years of studio, agency, and classroom experience.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Hands-on, outcome-driven content</h3>
+            <p>
+              Apply what you learn in real time with downloadable resources, templates, and guided challenges for every level.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Community-first philosophy</h3>
+            <p>
+              Join live feedback sessions, share work-in-progress, and grow alongside other creators who love to teach and learn.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="cta-panel">
+          <h3>Stay in the loop as new drops go live</h3>
+          <p>
+            Be the first to hear about fresh tutorials, premiere events, and exclusive creator resources. Newsletter sign-up and community invites are on the way—check back soon!
+          </p>
+          <a class="btn btn-primary" href="mailto:hello@creator.studio">Say hello</a>
+        </div>
+      </section>
     </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>Creator Studio — premium knowledge for ambitious makers.</div>
+        <small>© <span id="year"></span> Creator Studio. Crafted with purpose.</small>
+      </div>
+    </footer>
+
+    <script>
+      const yearEl = document.getElementById("year");
+      const currentYear = new Date().getFullYear();
+      if (yearEl) {
+        yearEl.textContent = currentYear;
+      }
+    </script>
   </body>
-  
 </html>
