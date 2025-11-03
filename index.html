@@ -3,20 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Creator Studio | Tutorials, Videos & Blogs</title>
-    <meta name="description" content="Creator Studio is a polished hub for tutorials, video lessons, and thoughtful blogs designed to help you learn and grow." />
+    <title>Minecraft Bedrock PvP & Ender Dragon Guide for Kids</title>
+    <meta
+      name="description"
+      content="Kid-friendly Minecraft Bedrock PvP tutorial with jump resetting, hotbar selecting, Java vs. Bedrock tips, and a full Ender Dragon battle guide."
+    />
     <style>
       :root {
         color-scheme: light dark;
-        --page-bg: radial-gradient(circle at top, #0d1b2a, #050810 55%);
-        --card-bg: rgba(12, 21, 36, 0.78);
-        --text-primary: #f8fafc;
-        --text-secondary: #c1c9d6;
-        --accent: #4cc9f0;
-        --accent-strong: #f72585;
+        --bg: radial-gradient(circle at top, #091024, #020409 60%);
+        --card: rgba(12, 19, 38, 0.82);
+        --card-strong: rgba(16, 29, 52, 0.92);
+        --text: #f4f6fb;
+        --text-soft: #c7d0e3;
+        --accent: #72ddf7;
+        --accent-strong: #ff8ba7;
         --border: rgba(255, 255, 255, 0.08);
-        --shadow: 0 25px 50px -20px rgba(15, 23, 42, 0.6);
-        --max-width: min(1100px, 90vw);
+        --shadow: 0 22px 45px -18px rgba(7, 12, 27, 0.7);
+        --max-width: min(1040px, 92vw);
         font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
       }
 
@@ -27,8 +31,8 @@
       body {
         margin: 0;
         min-height: 100vh;
-        background: var(--page-bg);
-        color: var(--text-primary);
+        background: var(--bg);
+        color: var(--text);
         display: flex;
         flex-direction: column;
       }
@@ -37,7 +41,7 @@
         position: sticky;
         top: 0;
         backdrop-filter: blur(14px);
-        background: rgba(5, 8, 16, 0.78);
+        background: rgba(3, 7, 16, 0.78);
         border-bottom: 1px solid var(--border);
         z-index: 10;
       }
@@ -53,21 +57,21 @@
 
       .brand {
         font-weight: 700;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
         font-size: 0.95rem;
       }
 
       nav a {
-        color: var(--text-secondary);
+        color: var(--text-soft);
         text-decoration: none;
-        margin-left: 1.5rem;
+        margin-left: 1.4rem;
         font-size: 0.95rem;
         transition: color 0.2s ease, transform 0.2s ease;
       }
 
-      nav a:focus,
-      nav a:hover {
+      nav a:hover,
+      nav a:focus {
         color: var(--accent);
         transform: translateY(-1px);
       }
@@ -79,248 +83,191 @@
       section {
         max-width: var(--max-width);
         margin: 0 auto;
-        padding: 4.5rem 0;
+        padding: 4rem 0;
       }
 
       .hero {
         display: grid;
-        gap: 2.5rem;
+        gap: 2.2rem;
         align-items: center;
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       }
 
-      .hero-copy h1 {
-        font-size: clamp(2.8rem, 5vw, 4rem);
+      .hero h1 {
+        font-size: clamp(2.9rem, 6vw, 4.1rem);
         margin-bottom: 1rem;
         line-height: 1.1;
       }
 
-      .hero-copy p {
-        color: var(--text-secondary);
+      .hero p {
+        color: var(--text-soft);
         font-size: 1.1rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         max-width: 32rem;
       }
 
-      .cta-group {
+      .btn-group {
         display: flex;
         flex-wrap: wrap;
-        gap: 1rem;
+        gap: 0.9rem;
       }
 
       .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 0.85rem 1.8rem;
+        padding: 0.85rem 1.7rem;
         border-radius: 999px;
         border: 1px solid transparent;
         font-weight: 600;
-        letter-spacing: 0.01em;
+        letter-spacing: 0.02em;
         cursor: pointer;
         transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
       }
 
       .btn-primary {
-        background: linear-gradient(135deg, var(--accent), #38bdf8);
-        color: #031321;
-        box-shadow: 0 15px 30px -15px rgba(76, 201, 240, 0.7);
-      }
-
-      .btn-primary:hover,
-      .btn-primary:focus {
-        transform: translateY(-2px);
-        box-shadow: 0 20px 35px -15px rgba(76, 201, 240, 0.9);
-      }
-
-      .btn-outline {
-        background: transparent;
-        color: var(--text-primary);
-        border-color: rgba(76, 201, 240, 0.4);
-      }
-
-      .btn-outline:hover,
-      .btn-outline:focus {
-        color: var(--accent);
-        border-color: var(--accent);
-        transform: translateY(-2px);
-      }
-
-      .hero-card {
-        background: var(--card-bg);
-        padding: 2rem;
-        border-radius: 20px;
-        border: 1px solid var(--border);
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+        color: #061426;
         box-shadow: var(--shadow);
       }
 
-      .hero-card h2 {
-        margin-top: 0;
-        font-size: 1.1rem;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
+      .btn-outline {
+        border: 1px solid var(--accent);
         color: var(--accent);
       }
 
-      .hero-card p {
-        margin: 0.75rem 0 0;
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-        line-height: 1.6;
-      }
-
-      .section-title {
-        text-transform: uppercase;
-        letter-spacing: 0.28em;
-        font-size: 0.85rem;
-        color: var(--accent);
-        margin-bottom: 1rem;
-      }
-
-      .section-heading {
-        font-size: clamp(2rem, 3.2vw, 2.6rem);
-        margin-top: 0;
-        margin-bottom: 2.5rem;
+      .btn:hover,
+      .btn:focus {
+        transform: translateY(-2px);
       }
 
       .card-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 1.8rem;
+        gap: 1.6rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
 
       .card {
-        background: var(--card-bg);
+        background: var(--card);
         border: 1px solid var(--border);
         border-radius: 18px;
         padding: 1.8rem;
-        position: relative;
-        overflow: hidden;
         box-shadow: var(--shadow);
-        transition: transform 0.25s ease, border-color 0.25s ease;
-      }
-
-      .card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(76, 201, 240, 0.18), transparent);
-        opacity: 0;
-        transition: opacity 0.25s ease;
-      }
-
-      .card:hover,
-      .card:focus-within {
-        transform: translateY(-6px);
-        border-color: rgba(76, 201, 240, 0.5);
-      }
-
-      .card:hover::before,
-      .card:focus-within::before {
-        opacity: 1;
       }
 
       .card h3 {
         margin-top: 0;
-        font-size: 1.25rem;
+        margin-bottom: 0.8rem;
+        font-size: 1.2rem;
       }
 
       .card p {
-        color: var(--text-secondary);
-        font-size: 0.98rem;
+        margin-top: 0;
+        margin-bottom: 0.8rem;
+        color: var(--text-soft);
         line-height: 1.6;
       }
 
       .tag {
         display: inline-block;
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
-        padding: 0.35rem 0.8rem;
+        background: rgba(114, 221, 247, 0.16);
+        color: var(--accent);
+        padding: 0.35rem 0.75rem;
         border-radius: 999px;
-        background: rgba(247, 37, 133, 0.08);
-        color: var(--accent-strong);
-        margin-bottom: 1rem;
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 0.9rem;
       }
 
-      .insight-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
+      h2.section-heading {
+        font-size: clamp(2rem, 4vw, 2.6rem);
+        margin-bottom: 1.1rem;
+      }
+
+      .section-title {
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.75rem;
+        margin-bottom: 0.7rem;
+      }
+
+      .grid-two {
         display: grid;
-        gap: 1.4rem;
+        gap: 1.6rem;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       }
 
-      .insight-list li {
-        padding-left: 1.5rem;
-        border-left: 2px solid rgba(76, 201, 240, 0.25);
-      }
-
-      .insight-list h4 {
-        margin: 0 0 0.4rem;
-        font-size: 1.05rem;
-      }
-
-      .insight-list p {
-        margin: 0;
-        color: var(--text-secondary);
-      }
-
-      .cta-panel {
-        background: linear-gradient(135deg, rgba(76, 201, 240, 0.12), rgba(247, 37, 133, 0.12));
-        border-radius: 24px;
-        border: 1px solid var(--border);
-        padding: 2.8rem;
-        text-align: center;
+      table.comparison {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card-strong);
+        border-radius: 18px;
+        overflow: hidden;
         box-shadow: var(--shadow);
       }
 
-      .cta-panel h3 {
-        margin: 0 0 1rem;
-        font-size: clamp(2rem, 3vw, 2.4rem);
+      table.comparison th,
+      table.comparison td {
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 1rem 1.1rem;
+        text-align: left;
       }
 
-      .cta-panel p {
-        margin: 0 auto 2rem;
-        max-width: 32rem;
-        color: var(--text-secondary);
+      table.comparison th {
+        background: rgba(9, 16, 36, 0.7);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.75rem;
+      }
+
+      table.comparison td strong {
+        color: var(--accent);
+      }
+
+      ul.checklist,
+      ol.steps {
+        margin: 0;
+        padding-left: 1.2rem;
+        color: var(--text-soft);
+        line-height: 1.6;
+      }
+
+      ol.steps li {
+        padding-left: 0.2rem;
+        margin-bottom: 0.85rem;
+      }
+
+      ul.checklist li {
+        margin-bottom: 0.7rem;
+      }
+
+      .callout {
+        background: linear-gradient(135deg, rgba(114, 221, 247, 0.22), rgba(255, 139, 167, 0.18));
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 18px;
+        padding: 1.6rem;
+        color: var(--text);
       }
 
       footer {
         border-top: 1px solid var(--border);
-        background: rgba(5, 8, 16, 0.84);
+        padding: 2.2rem 0;
+        text-align: center;
+        color: var(--text-soft);
+        font-size: 0.85rem;
       }
 
-      .footer-inner {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 2rem 0 3rem;
-        color: var(--text-secondary);
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
+      @media (max-width: 640px) {
+        .nav-bar {
+          flex-direction: column;
+          gap: 0.6rem;
+        }
 
-      .footer-inner small {
-        opacity: 0.7;
-      }
-
-      @media (max-width: 720px) {
-        header {
-          position: static;
-        }
-        nav {
-          display: none;
-        }
-        .hero {
-          text-align: center;
-        }
-        .hero-copy p {
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .cta-group {
-          justify-content: center;
+        nav a {
+          margin-left: 0;
+          margin-right: 1rem;
         }
       }
     </style>
@@ -328,144 +275,248 @@
   <body>
     <header>
       <div class="nav-bar">
-        <div class="brand">Creator Studio</div>
-        <nav aria-label="Primary navigation">
-          <a href="#tutorials">Tutorials</a>
-          <a href="#insights">Insights</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+        <div class="brand">Pixel Battle School</div>
+        <nav aria-label="Primary">
+          <a href="#pvp-basics">PvP Basics</a>
+          <a href="#skills">Core Skills</a>
+          <a href="#comparison">Java vs. Bedrock</a>
+          <a href="#dragon">Ender Dragon</a>
         </nav>
       </div>
     </header>
 
     <main>
-      <section class="hero">
-        <div class="hero-copy">
-          <h1>Crafting premium tutorials, videos, and blog stories.</h1>
+      <section class="hero" id="top">
+        <div>
+          <h1>Minecraft Bedrock PvP & Ender Dragon Adventure</h1>
           <p>
-            Welcome to Creator Studio—the curated home for immersive learning experiences.
-            Discover step-by-step tutorials, deep-dive video lessons, and insightful blogs that
-            help you build confidence in your craft.
+            Learn friendly, easy-to-follow PvP moves like hotbar selecting and jump resetting, understand the differences between
+            Bedrock and Java, and follow a step-by-step plan to defeat the Ender Dragon. Built for younger players who want to win
+            more duels and finish the story.
           </p>
-          <div class="cta-group">
-            <a class="btn btn-primary" href="#tutorials">Explore tutorials</a>
-            <a class="btn btn-outline" href="#contact">Subscribe for updates</a>
+          <div class="btn-group">
+            <a class="btn btn-primary" href="#pvp-basics">Start with PvP basics</a>
+            <a class="btn btn-outline" href="#dragon">Jump to the dragon fight</a>
           </div>
         </div>
-        <article class="hero-card" aria-labelledby="upcoming">
-          <h2 id="upcoming">Upcoming premiere</h2>
+        <article class="card" aria-labelledby="highlight">
+          <span class="tag">Quick Tip</span>
+          <h2 id="highlight">Warm up in creative</h2>
           <p>
-            "Designing with Intent"—a cinematic, hands-on workshop that walks through creating a
-            professional-grade video tutorial from storyboard to final export. Launching soon.
+            Before hopping into a real match, launch a flat world in Creative mode. Practice sprinting, swapping items, and timing
+            your jump resets without worrying about health.
           </p>
         </article>
       </section>
 
-      <section id="tutorials">
-        <p class="section-title">Tutorial Vault</p>
-        <h2 class="section-heading">Dive into structured learning paths</h2>
+      <section id="pvp-basics">
+        <p class="section-title">Start here</p>
+        <h2 class="section-heading">PvP foundations for kids</h2>
+        <div class="grid-two">
+          <article class="card">
+            <h3>Easy controls to lock in</h3>
+            <ul class="checklist">
+              <li><strong>Movement circle:</strong> Sprint forward, strafe left/right, then crouch to steady aim.</li>
+              <li><strong>Hotbar selecting:</strong> Keep sword/axe in slot 1, food in slot 2, blocks in slot 3 for fast swaps.</li>
+              <li><strong>Health check:</strong> Always enter fights with full hearts and 2+ cooked food items.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Match flow mindset</h3>
+            <ul class="checklist">
+              <li>Open with a <strong>sprint hit</strong> to knock back your opponent.</li>
+              <li>Watch their hand to predict hits; step sideways to dodge, then counter.</li>
+              <li>Count to three between big swings so your timing stays steady.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="skills">
+        <p class="section-title">Move set</p>
+        <h2 class="section-heading">Core PvP skills to practice</h2>
         <div class="card-grid">
-          <article class="card" aria-labelledby="card-design">
-            <span class="tag">Video Series</span>
-            <h3 id="card-design">Design Systems that Scale</h3>
+          <article class="card" aria-labelledby="selecting">
+            <span class="tag">Bedrock Focus</span>
+            <h3 id="selecting">Hotbar Selecting</h3>
             <p>
-              Master the art of building consistent, reusable UI components with a complete Figma to code pipeline.
-              Includes downloadable assets and code walkthroughs.
+              Swap between sword, snowballs, and blocks without looking down. On controller, flick the D-pad or bumper in short
+              taps; on touch, drag the item with your thumb while still moving.
+            </p>
+            <p><strong>Drill:</strong> Fight a husk in a training world and swap to a block every third hit.</p>
+          </article>
+          <article class="card" aria-labelledby="reset">
+            <span class="tag">Bedrock Focus</span>
+            <h3 id="reset">Jump Resetting</h3>
+            <p>
+              After getting knocked back, jump once, land, and hit the moment your feet touch the ground. This recharges your
+              sprint speed, giving a stronger knockback on the next strike.
+            </p>
+            <p><strong>Rhythm:</strong> Knocked back → jump → land → sprint-hit. Count “1-2-3” out loud to learn the timing.</p>
+          </article>
+          <article class="card" aria-labelledby="wtap">
+            <span class="tag">Java Slice</span>
+            <h3 id="wtap">W-Tapping (Java)</h3>
+            <p>
+              Java players can flick the forward key between hits to refresh sprint knockback. Try it on Bedrock only if you use
+              mouse & keyboard—controllers won’t gain extra power from it.
             </p>
           </article>
-          <article class="card" aria-labelledby="card-dev">
-            <span class="tag">Bootcamp</span>
-            <h3 id="card-dev">Full-stack Fundamentals in 10 Days</h3>
+          <article class="card" aria-labelledby="aim">
+            <span class="tag">Shared Skill</span>
+            <h3 id="aim">Aim & Crosshair Control</h3>
             <p>
-              Learn the essentials of modern web development, from API design to UI polish, through a project-based curriculum.
+              Keep the crosshair at chest height. Use gentle stick movements or low mouse sensitivity (35–45% on controller,
+              800 DPI on mouse) so you don’t over-aim.
             </p>
           </article>
-          <article class="card" aria-labelledby="card-video">
-            <span class="tag">Live Session</span>
-            <h3 id="card-video">Lighting & Audio for Creators</h3>
+          <article class="card" aria-labelledby="combo">
+            <span class="tag">Shared Skill</span>
+            <h3 id="combo">Combo Building</h3>
             <p>
-              Upgrade your production quality with pro-level lighting setups, gear recommendations, and editing best practices.
+              Combine jump resets with short sprints to keep enemies airborne. In Bedrock, chain 3–4 hits, place a block, and
+              continue swinging to pin them.
             </p>
           </article>
-        </div>
-      </section>
-
-      <section id="insights">
-        <p class="section-title">Blog Insights</p>
-        <h2 class="section-heading">Fresh perspectives & behind-the-scenes notes</h2>
-        <div class="card">
-          <ul class="insight-list">
-            <li>
-              <h4>Blueprint for binge-worthy tutorials</h4>
-              <p>
-                Explore the storytelling frameworks that keep viewers engaged from intro to final call-to-action.
-              </p>
-            </li>
-            <li>
-              <h4>Editing workflows that save hours</h4>
-              <p>
-                A step-by-step guide to automating repetitive edits and leveling up your post-production pipeline.
-              </p>
-            </li>
-            <li>
-              <h4>Finding your signature teaching style</h4>
-              <p>
-                Practical exercises to define your voice and deliver content that resonates with your community.
-              </p>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="about">
-        <p class="section-title">About</p>
-        <h2 class="section-heading">Built for creators who never stop learning</h2>
-        <div class="card-grid">
-          <article class="card">
-            <h3>Curated by experienced mentors</h3>
+          <article class="card" aria-labelledby="escape">
+            <span class="tag">Shared Skill</span>
+            <h3 id="escape">Safe Escape</h3>
             <p>
-              Every course and blog is crafted by seasoned practitioners with years of studio, agency, and classroom experience.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Hands-on, outcome-driven content</h3>
-            <p>
-              Apply what you learn in real time with downloadable resources, templates, and guided challenges for every level.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Community-first philosophy</h3>
-            <p>
-              Join live feedback sessions, share work-in-progress, and grow alongside other creators who love to teach and learn.
+              If hearts drop below four, place a wall, eat, and circle back in. Bedrock shields raise instantly; Java shields need
+              a full right-click, so plan your retreat moves by edition.
             </p>
           </article>
         </div>
       </section>
 
-      <section id="contact">
-        <div class="cta-panel">
-          <h3>Stay in the loop as new drops go live</h3>
+      <section id="comparison">
+        <p class="section-title">Know your edition</p>
+        <h2 class="section-heading">Quick Bedrock vs. Java PvP differences</h2>
+        <table class="comparison" aria-label="Comparison of Bedrock and Java PvP rules">
+          <thead>
+            <tr>
+              <th scope="col">Topic</th>
+              <th scope="col">Bedrock Edition</th>
+              <th scope="col">Java Edition</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hit speed</td>
+              <td><strong>Faster</strong> swings; no cooldown meter. Spam-clicking still gives damage but loses knockback.</td>
+              <td>Has an attack cooldown meter; time swings for full damage. W-tapping boosts knockback.</td>
+            </tr>
+            <tr>
+              <td>Aiming help</td>
+              <td>Controller aim assist gives gentle stickiness; touch controls use auto-hit range.</td>
+              <td>No aim assist. Practice mouse precision and short strafes.</td>
+            </tr>
+            <tr>
+              <td>Projectiles</td>
+              <td>Snowballs and eggs deal damage; great for breaking enemy combos.</td>
+              <td>Snowballs push but don’t damage. Use rods or bows instead.</td>
+            </tr>
+            <tr>
+              <td>Shields</td>
+              <td>Raise instantly, perfect for blocking sword rushes. Remember to crouch for extra safety.</td>
+              <td>Have a short raising delay; best used to stop axe crits.</td>
+            </tr>
+            <tr>
+              <td>Platforms</td>
+              <td>Works on console, mobile, and PC with cross-play. Keep HUD simple for better reaction time.</td>
+              <td>PC only. Customize keybinds to reach hotkeys quickly.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="practice">
+        <p class="section-title">Weekly routine</p>
+        <h2 class="section-heading">30-minute practice plan</h2>
+        <div class="grid-two">
+          <article class="card">
+            <h3>Warm-up (10 minutes)</h3>
+            <ol class="steps">
+              <li>5 minutes of parkour jumps to wake up timing.</li>
+              <li>2 minutes swapping through hotbar slots while sprinting.</li>
+              <li>3 minutes hitting training dummies (armor stands) and practicing jump resets.</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h3>Battle drills (20 minutes)</h3>
+            <ol class="steps">
+              <li>5 duels in a server or with a friend focusing only on opening hits.</li>
+              <li>5 duels where you must place a block between combos.</li>
+              <li>End with 5 duels using food management—eat after every second fight.</li>
+            </ol>
+          </article>
+        </div>
+        <div class="callout" role="note">
+          <strong>Coach note:</strong> Record one fight each week. Watch it back and count how often you land jump resets or swap to
+          the right item. Improvement is easier when you can see yourself play.
+        </div>
+      </section>
+
+      <section id="dragon">
+        <p class="section-title">Story mode finale</p>
+        <h2 class="section-heading">Beat the Ender Dragon step by step</h2>
+        <div class="grid-two">
+          <article class="card">
+            <h3>Gear checklist</h3>
+            <ul class="checklist">
+              <li>Diamond or netherite armor (Feather Falling boots help with End launches).</li>
+              <li>Sharpness sword + Power bow (Bedrock) or crossbow (Java) with many arrows.</li>
+              <li>16+ ender pearls, 8+ beds (for Bedrock perching damage), water bucket, slow falling potion.</li>
+              <li>Plenty of blocks (at least 64) to climb obsidian towers safely.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Battle phases</h3>
+            <ol class="steps">
+              <li><strong>Crystal clean-up:</strong> Pillar up, break crystals with bow shots or by placing blocks around them.</li>
+              <li><strong>Ground control:</strong> When the dragon swoops, stand near the bedrock fountain, use jump resets to dodge
+                Endermen, and place water if you get launched.</li>
+              <li><strong>Perch burst:</strong> When the dragon lands, Bedrock players spam sword hits or bed explosions; Java players
+                wait for the head to drop, then crit with an axe.</li>
+              <li><strong>Finishing move:</strong> Keep eating, watch for dragon breath, and use pearls to hop between safe spots.</li>
+            </ol>
+          </article>
+        </div>
+        <article class="card" aria-labelledby="teams">
+          <h3 id="teams">Team tactics</h3>
           <p>
-            Be the first to hear about fresh tutorials, premiere events, and exclusive creator resources. Newsletter sign-up and community invites are on the way—check back soon!
+            Split roles: two players smash crystals, one distracts Endermen, and one keeps everyone fed. Call out when the dragon
+            circles so everyone can prepare for the perch moment.
           </p>
-          <a class="btn btn-primary" href="mailto:hello@creator.studio">Say hello</a>
+        </article>
+      </section>
+
+      <section id="glossary">
+        <p class="section-title">Vocabulary</p>
+        <h2 class="section-heading">Quick glossary for new PvP heroes</h2>
+        <div class="card-grid">
+          <article class="card">
+            <h3>Combo</h3>
+            <p>A chain of hits that keeps your enemy in the air so they can’t strike back right away.</p>
+          </article>
+          <article class="card">
+            <h3>Hotbar</h3>
+            <p>The 9-item strip at the bottom of the screen. Mastering fast swaps is called “selecting.”</p>
+          </article>
+          <article class="card">
+            <h3>Jump Reset</h3>
+            <p>A single jump after being hit that restores sprint speed, powering up your next attack.</p>
+          </article>
+          <article class="card">
+            <h3>Perch</h3>
+            <p>The moment the Ender Dragon lands on the fountain, giving you a short time to do big damage.</p>
+          </article>
         </div>
       </section>
     </main>
 
     <footer>
-      <div class="footer-inner">
-        <div>Creator Studio — premium knowledge for ambitious makers.</div>
-        <small>© <span id="year"></span> Creator Studio. Crafted with purpose.</small>
-      </div>
+      Crafted for young Bedrock adventurers. Keep practicing, stay kind, and enjoy every block!
     </footer>
-
-    <script>
-      const yearEl = document.getElementById("year");
-      const currentYear = new Date().getFullYear();
-      if (yearEl) {
-        yearEl.textContent = currentYear;
-      }
-    </script>
   </body>
 </html>
