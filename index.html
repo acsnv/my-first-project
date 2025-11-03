@@ -93,6 +93,24 @@
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       }
 
+      .hero-visual {
+        position: relative;
+        min-height: 320px;
+        border-radius: 24px;
+        overflow: hidden;
+        background: radial-gradient(circle at 30% 20%, rgba(119, 34, 255, 0.45), rgba(9, 16, 36, 0.9));
+        border: 1px solid rgba(132, 191, 255, 0.1);
+        box-shadow: inset 0 0 40px rgba(114, 221, 247, 0.08);
+      }
+
+      .hero-visual canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
       .hero h1 {
         font-size: clamp(2.9rem, 6vw, 4.1rem);
         margin-bottom: 1rem;
@@ -299,14 +317,9 @@
             <a class="btn btn-outline" href="#dragon">Jump to the dragon fight</a>
           </div>
         </div>
-        <article class="card" aria-labelledby="highlight">
-          <span class="tag">Quick Tip</span>
-          <h2 id="highlight">Warm up in creative</h2>
-          <p>
-            Before hopping into a real match, launch a flat world in Creative mode. Practice sprinting, swapping items, and timing
-            your jump resets without worrying about health.
-          </p>
-        </article>
+        <div class="hero-visual" aria-hidden="true">
+          <canvas id="dragonCanvas"></canvas>
+        </div>
       </section>
 
       <section id="pvp-basics">
@@ -518,5 +531,151 @@
     <footer>
       Crafted for young Bedrock adventurers. Keep practicing, stay kind, and enjoy every block!
     </footer>
+    <script type="module">
+      import * as THREE from "https://unpkg.com/three@0.161.0/build/three.module.js";
+
+      const canvas = document.getElementById("dragonCanvas");
+      if (!canvas) {
+        console.warn("Dragon canvas missing");
+        return;
+      }
+
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      } catch (error) {
+        console.warn("WebGL renderer failed to start", error);
+        return;
+      }
+      renderer.setPixelRatio(window.devicePixelRatio || 1);
+      renderer.setClearColor(0x000000, 0);
+
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+      camera.position.set(6, 3, 8);
+
+      const ambientLight = new THREE.AmbientLight(0xc8d6ff, 0.8);
+      scene.add(ambientLight);
+
+      const rimLight = new THREE.DirectionalLight(0xff8ba7, 0.9);
+      rimLight.position.set(-4, 6, 8);
+      scene.add(rimLight);
+
+      const dragonGroup = new THREE.Group();
+      scene.add(dragonGroup);
+
+      const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0x161a33, emissive: 0x1b0d33, emissiveIntensity: 0.4, roughness: 0.45 });
+      const accentMaterial = new THREE.MeshStandardMaterial({ color: 0x72ddf7, emissive: 0x215c73, emissiveIntensity: 0.6, roughness: 0.3 });
+
+      const makeCube = (w, h, d, colorMaterial) => new THREE.Mesh(new THREE.BoxGeometry(w, h, d), colorMaterial);
+
+      const body = makeCube(2.6, 0.6, 0.6, bodyMaterial);
+      dragonGroup.add(body);
+
+      const neck = makeCube(0.9, 0.5, 0.5, bodyMaterial);
+      neck.position.set(1.7, 0.25, 0);
+      dragonGroup.add(neck);
+
+      const head = makeCube(0.8, 0.6, 0.6, bodyMaterial);
+      head.position.set(2.4, 0.3, 0);
+      dragonGroup.add(head);
+
+      const snout = makeCube(0.5, 0.3, 0.4, bodyMaterial);
+      snout.position.set(2.9, 0.1, 0);
+      dragonGroup.add(snout);
+
+      const leftEye = makeCube(0.15, 0.15, 0.15, accentMaterial);
+      leftEye.position.set(2.55, 0.3, 0.18);
+      dragonGroup.add(leftEye);
+
+      const rightEye = leftEye.clone();
+      rightEye.position.set(2.55, 0.3, -0.18);
+      dragonGroup.add(rightEye);
+
+      const tailSegments = 5;
+      for (let i = 1; i <= tailSegments; i++) {
+        const tail = makeCube(0.9 - i * 0.12, 0.4, 0.4, bodyMaterial);
+        tail.position.set(-1.2 - i * 0.6, 0.05 + i * 0.06, 0);
+        dragonGroup.add(tail);
+      }
+
+      const wingMaterial = new THREE.MeshStandardMaterial({ color: 0x2d1d57, emissive: 0x422a78, emissiveIntensity: 0.45, roughness: 0.5 });
+
+      const leftWing = new THREE.Group();
+      const leftPanel = makeCube(3.2, 0.15, 1.2, wingMaterial);
+      leftPanel.position.set(1, 0, 0.8);
+      leftWing.add(leftPanel);
+      leftWing.position.set(0.3, 0.4, 0.4);
+      dragonGroup.add(leftWing);
+
+      const rightWing = new THREE.Group();
+      const rightPanel = makeCube(3.2, 0.15, 1.2, wingMaterial);
+      rightPanel.position.set(1, 0, -0.8);
+      rightWing.add(rightPanel);
+      rightWing.position.set(0.3, 0.4, -0.4);
+      dragonGroup.add(rightWing);
+
+      const crystalMaterial = new THREE.MeshStandardMaterial({ color: 0xff8ba7, emissive: 0xff4b8a, emissiveIntensity: 0.7, roughness: 0.2 });
+      const crystal = makeCube(0.7, 0.7, 0.7, crystalMaterial);
+      crystal.position.set(0, -0.6, 0);
+      dragonGroup.add(crystal);
+
+      const podiumMaterial = new THREE.MeshStandardMaterial({ color: 0x0f162d, roughness: 0.8 });
+      const podium = makeCube(4.2, 0.5, 4.2, podiumMaterial);
+      podium.position.set(0, -1.1, 0);
+      dragonGroup.add(podium);
+
+      const sparkleGeometry = new THREE.BufferGeometry();
+      const sparkleCount = 180;
+      const positions = new Float32Array(sparkleCount * 3);
+      for (let i = 0; i < sparkleCount; i++) {
+        positions[i * 3 + 0] = (Math.random() - 0.5) * 18;
+        positions[i * 3 + 1] = Math.random() * 10 - 2;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 18;
+      }
+      sparkleGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      const sparkleMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.07, transparent: true, opacity: 0.8 });
+      const sparkles = new THREE.Points(sparkleGeometry, sparkleMaterial);
+      scene.add(sparkles);
+
+      const resize = () => {
+        const { clientWidth, clientHeight } = canvas;
+        if (clientWidth === 0 || clientHeight === 0) {
+          return;
+        }
+        const pixelRatio = window.devicePixelRatio || 1;
+        const width = clientWidth * pixelRatio;
+        const height = clientHeight * pixelRatio;
+        if (canvas.width !== width || canvas.height !== height) {
+          renderer.setSize(clientWidth, clientHeight, false);
+          camera.aspect = clientWidth / clientHeight;
+          camera.updateProjectionMatrix();
+        }
+      };
+
+      resize();
+      window.addEventListener("resize", resize);
+
+      const clock = new THREE.Clock();
+
+      const animate = () => {
+        const elapsed = clock.getElapsedTime();
+        dragonGroup.rotation.y = Math.sin(elapsed * 0.4) * 0.6 + 0.6;
+        dragonGroup.position.y = Math.sin(elapsed * 1.2) * 0.35;
+
+        const wingAngle = Math.sin(elapsed * 3) * 0.35 + 0.4;
+        leftWing.rotation.z = wingAngle;
+        rightWing.rotation.z = -wingAngle;
+
+        sparkles.rotation.y += 0.0008;
+        sparkles.rotation.x += 0.0004;
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      };
+
+      animate();
+    </script>
   </body>
 </html>
